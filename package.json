@@ -1,0 +1,23 @@
+{
+  "name": "deepfakecheckchrome",
+  "version": "1.0.0",
+  "description": "Detect DeepFake videos",
+  "scripts": {
+    "copyJS": "cp src/popup.js dist/ && cp src/options.js dist/ && cp src/background.js dist/ && cp src/deepfacke.js dist/",
+    "copyHTML": "cp src/*.html dist/",
+    "copyManifest": "cp src/manifest.json dist/",
+    "copyImages": "cp -r src/images dist/",
+    "copyCSS": "cp src/*.css dist/",
+    "copy": "npm run copyManifest && npm run copyJS && npm run copyHTML && npm run copyImages && npm run copyCSS",
+    "build": "parcel build src/manifest.json",
+    "build:parcel": "parcel build src/*.html src/*.js --public-url ./ && npm run copyManifest && npm run copyImages && npm run copyCSS",
+    "build:cpx": "cpx 'src/*.{json,png,svg}' dist",
+    "build:extension": "run-s build:parcel  build:cpx"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@parcel/config-webextension": "^2.0.1",
+    "superagent": "^6.1.0"
+  }
+}
