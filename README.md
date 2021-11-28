@@ -12,14 +12,14 @@ A new button is integrated in the YouTube player for this purpose.
 
 ## Use
 After installation, the options page will open automatically.  
-There a Modzy ApiKey must be entered.  
+A [Modzy](https://www.modzy.com/) ApiKey must be entered.  
 The page contains instructions for this.  
 
 If you don't see this new icon in the player, please reload the page. #FIXME
 ![new icon](src/images/newIcon.png)
 
 ## Development
-I use [PARCEL](https://parceljs.org/) as build tool and install it globally with.
+I use [PARCEL](https://parceljs.org/) as build tool and install it globally with
 ```shell
 # install PARCEL
 npm install -g parcel

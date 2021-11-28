@@ -1,6 +1,6 @@
 {
-  "name": "DeepFake checks",
-  "description": "AI extension for YouTube deepfakes checks",
+  "name": "DeepFake check",
+  "description": "AI extension for YouTube deepfake checks",
   "version": "1.0",
   "manifest_version": 3,
   "background": {
@@ -14,7 +14,7 @@
       "css": ["content.css"]
     }
   ],
-  "permissions": ["storage", "activeTab", "scripting", "tabs", "downloads"],
+  "permissions": ["storage", "activeTab", "tabs"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -32,8 +32,7 @@
   },
   "options_page": "options.html",
   "host_permissions": [
-    "https://www.youtube.com/*",
-    "*://*/*"
+    "https://www.youtube.com/*"
   ],
   "web_accessible_resources": [
     {
