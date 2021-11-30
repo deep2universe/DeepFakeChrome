@@ -43,7 +43,6 @@ function getLatestModelVersionAndSubmit(){
  * Submit job to latest model version
  */
 function submitToLatestVersion(){
-    console.log("submitToLatestVersion enter");
     superagent
         .post("https://app.modzy.com/api/jobs")
         .send({
