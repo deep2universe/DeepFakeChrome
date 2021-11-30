@@ -15,7 +15,10 @@
 <br>
 <br>
 <label for="apiKey">Enter ApiKey:</label>
-<input type="text" id="apiKey" name="apiKey"><br><br>
+<input type="text" id="apiKey" name="apiKey" maxlength="41" size="41"><br><br>
+<div id="invalidKey" class="errorMessage">
+    <span>ApiKey is not valid.</span>
+</div>
 <button id="submitApiKey">Set ApiKey</button>
 
 <div id="tutorial" style="padding-top: 150px; font-size: large">

@@ -1,15 +1,55 @@
 import * as superagent from 'superagent/dist/superagent';
 
 let apiKey;
+let version="0.0.7"; // default version override by getLatestModelVersionAndSubmit
+let base64data;      // video payload
 
-function submitJob(base64data, pApiKey){
+/**
+ * Submit job.
+ * First get the latest version of the deepfake model, then submit
+ * @param pBase64data
+ * @param pApiKey
+ */
+function submitJob(pBase64data, pApiKey){
     apiKey = pApiKey;
+    base64data = pBase64data
+
+    getLatestModelVersionAndSubmit();
+
+}
+
+/**
+ * Get the latest version from deepfake model
+ * After that submit the job with this version or use default if call fails
+ */
+function getLatestModelVersionAndSubmit(){
+    superagent
+        .get("https://app.modzy.com/api/models/93ltr2oepu/versions?isAvailable=true&isActive=true&sort-by=version&direction=DESC")
+        .set("Accept", "application/json")
+        .set("Authorization", "ApiKey "+ apiKey)
+        .redirects(0)
+        .end(function (err, res) {
+            if (err || !res.ok) {
+                // ignore error, use default version
+            } else {
+                // because &sort-by=version&direction=DESC latest version is at pos 0
+                version = res.body[0]["version"];
+            }
+            submitToLatestVersion();
+        });
+}
+
+/**
+ * Submit job to latest model version
+ */
+function submitToLatestVersion(){
+    console.log("submitToLatestVersion enter");
     superagent
         .post("https://app.modzy.com/api/jobs")
         .send({
             model: {
                 identifier: "93ltr2oepu",
-                version: "0.0.6",
+                version: version,
             },
             input: {
                 type: "embedded",
@@ -30,9 +70,13 @@ function submitJob(base64data, pApiKey){
                 pollStatus(res.body["jobIdentifier"]);
             }
         });
-
 }
 
+/**
+ * Poll job status with interval until finished
+ *
+ * @param jobIdentifier
+ */
 function pollStatus(jobIdentifier){
 
     const pollJobInterval = setInterval(function (){
@@ -55,6 +99,11 @@ function pollStatus(jobIdentifier){
     }, 500);
 }
 
+/**
+ * Get result from finished job and process status from result
+ *
+ * @param jobIdentifier
+ */
 function getJobResult(jobIdentifier){
     superagent
         .get("https://app.modzy.com/api/results/" + jobIdentifier)
@@ -84,6 +133,12 @@ function getJobResult(jobIdentifier){
         });
 }
 
+/**
+ * Update gui div with info about model result
+ *
+ * @param status
+ * @param result
+ */
 function updateModelResult(status, result){
     let resultDIV = document.getElementById("deep-check-results");;
     let message = document.getElementById("result-deepfake-message");
