@@ -1,2 +1,2 @@
-chrome.runtime.onInstalled.addListener((function(){chrome.runtime.openOptionsPage?chrome.runtime.openOptionsPage():window.open(chrome.runtime.getURL("options.html"))}));
+chrome.runtime.onInstalled.addListener((function(){chrome.runtime.openOptionsPage?chrome.runtime.openOptionsPage():window.open(chrome.runtime.getURL("options.html"))})),chrome.webNavigation.onHistoryStateUpdated.addListener((function(e){e.url.includes("https://www.youtube.com/watch")&&chrome.tabs.query({active:!0,currentWindow:!0},(function(e){chrome.tabs.sendMessage(e[0].id,{message:"initRecordButton"})}))}));
 //# sourceMappingURL=background.js.map

@@ -7,7 +7,6 @@ document.getElementById("submitApiKey").addEventListener("click", function (){
     if(isApiKeyValid(value)){
         errorMessage.style.display='none';
         chrome.storage.sync.set({apiKey: value}, function() {
-            console.log("Set ApiKey");
         });
     }else {
         errorMessage.style.display='block';

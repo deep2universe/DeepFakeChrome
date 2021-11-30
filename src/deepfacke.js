@@ -7,33 +7,44 @@ let mainVideo = document.getElementsByClassName("html5-main-video")[0];
 let recordingTimeMS = 5000;
 let apiKey;
 
+/**
+ * Init extension for content page
+ *
+ * @param pApiKey
+ */
 function init(pApiKey){
     apiKey=pApiKey;
-    if ('MediaRecorder' in window) {
-        // everything is good, let's go ahead
-        console.log("browser supports MediaRecorder");
-    } else {
-        console.log("Sorry, your browser doesn't support the MediaRecorder API, so this demo will not work.");
-    }
 
-    var animControlsButton = document.getElementsByClassName("ytp-right-controls");
-    if(document.getElementById("deepfake") === null || document.getElementById("deepfake") === undefined){
-        var button = document.createElement('button');
-        button.id="deepfake";
-        button.className = 'ytp-button it-player-button';
-        button.dataset.title = "Deepfake detection";
-        button.onclick = function(){startStopRecording();}
-        animControlsButton[0].insertBefore(button, animControlsButton[0].childNodes[0]);
+    initDeepFakeButtonInPlayer();
 
-        let playerImage = new Image();
-        playerImage.src = chrome.runtime.getURL("/images/logo48.png");
-        playerImage.onload = () => {
-            var imgTag = document.createElement('img');
-            imgTag.src=playerImage.src;
-            button.appendChild(imgTag);
+}
+
+/**
+ * Since it sometimes takes a while to construct the gui, new player buttons are added in an interval if the right-controls are available
+ */
+function initDeepFakeButtonInPlayer(){
+    const buttonAvailableInterval = setInterval(function (){
+        var animControlsButton = document.getElementsByClassName("ytp-right-controls");
+        if (animControlsButton !== undefined){
+            if(document.getElementById("deepfake") === null || document.getElementById("deepfake") === undefined){
+                var button = document.createElement('button');
+                button.id="deepfake";
+                button.className = 'ytp-button it-player-button';
+                button.dataset.title = "Deepfake detection";
+                button.onclick = function(){startStopRecording();}
+                animControlsButton[0].insertBefore(button, animControlsButton[0].childNodes[0]);
+
+                let playerImage = new Image();
+                playerImage.src = chrome.runtime.getURL("/images/logo48.png");
+                playerImage.onload = () => {
+                    var imgTag = document.createElement('img');
+                    imgTag.src=playerImage.src;
+                    button.appendChild(imgTag);
+                }
+            }
+            clearInterval(buttonAvailableInterval);
         }
-    }
-
+    }, 100);
 }
 
 function showVideoToCheck(){
@@ -77,13 +88,15 @@ function wait(delayInMS) {
 
 function startStopRecording(){
     let recordedBlob;
+    mainVideo = document.getElementsByClassName("html5-main-video")[0];
     // if(!isRecording){
 
         // stop(document.getElementsByClassName("html5-main-video")[0]);
+        document.getElementById("content").style.backgroundColor="#8b0000";
         startRecording(mainVideo.captureStream(), recordingTimeMS)
         .then (recordedChunks => {
+            document.getElementById("content").style.backgroundColor="#ffffff";
             showVideoToCheck();
-            // console.log("then from start recording");
             recordedBlob = new Blob(recordedChunks, { type: "video/webm" });
             recording.src = URL.createObjectURL(recordedBlob);
             downloadButton.href = recording.src;
@@ -106,8 +119,6 @@ function startStopRecording(){
 }
 
 async function startRecording(stream, lengthInMS) {
-    // console.log("strartRecording");
-
     var options = { mimeType: "video/webm" };
     let recorder = new MediaRecorder(stream,options);
     let data = [];
@@ -131,16 +142,13 @@ async function startRecording(stream, lengthInMS) {
 }
 
 function stop(stream) {
-    // console.log("call stop func");
     stream.getTracks().forEach(track => track.stop());
-
 }
 
 
 window.addEventListener("onhashchange", function() {
     if(!location.href.includes("watch")){
         if(document.getElementById("recordingDiv") !== null){
-            console.log("I will remove this")
             document.getElementById("recordingDiv").remove();
         }
     }
@@ -163,12 +171,11 @@ new MutationObserver(() => {
 }).observe(document, {subtree: true, childList: true});
 
 /**
- * Clear detector interval when we are not watching a video.
+ * Remove recordingDiv if we do not watch a video
  */
 function onUrlChange() {
     if(!location.href.includes("watch")){
         if(document.getElementById("recordingDiv") !== null){
-            console.log("I will remove this")
             document.getElementById("recordingDiv").remove();
         }
     }
