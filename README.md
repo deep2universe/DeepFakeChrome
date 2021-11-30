@@ -16,7 +16,7 @@ A [Modzy](https://www.modzy.com/) ApiKey must be entered.
 The page contains instructions for this.  
 
 With this new button in the player you can start the video recording.  
-![new icon](src/images/newIcon.png)
+![new icon](src/images/newIcon.png)  
 Default recording is 5 seconds.  
 After recording, the video is automatically sent to the AI for analysis.  
 You can watch the recorded video in an extra player or download it.  
