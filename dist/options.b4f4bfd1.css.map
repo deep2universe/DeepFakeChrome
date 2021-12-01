@@ -1,0 +1,1 @@
+{"mappings":"AAAA,cACA,SAAA,CACA,YAAA,CACA,gBACA","sources":["src/options.css"],"sourcesContent":[".errorMessage{\r\n    color: red;\r\n    display: none;\r\n    font-size: medium;\r\n}\r\n"],"names":[],"version":3,"file":"options.b4f4bfd1.css.map"}

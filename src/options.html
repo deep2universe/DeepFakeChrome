@@ -7,6 +7,8 @@
     <title>Options for AI DeepFake</title>
     <meta name="description" content="Set Options for AI DeepFake browser extension">
     <link rel="stylesheet" href="options.css">
+    <link rel="stylesheet" href="awsm.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
@@ -14,44 +16,63 @@
 <img src="images/logo128.png">
 <br>
 <br>
-<label for="apiKey">Enter ApiKey:</label>
-<input type="text" id="apiKey" name="apiKey" maxlength="41" size="41"><br><br>
+<label for="apiKey">Enter your API key:</label>
+<input type="text" id="apiKey" name="apiKey" maxlength="41" size="41"><br>
 <div id="invalidKey" class="errorMessage">
     <span>ApiKey is not valid.</span>
 </div>
-<button id="submitApiKey">Set ApiKey</button>
+<button id="submitApiKey">Set API key</button>
 
 <div id="tutorial" style="padding-top: 150px; font-size: large">
-    Detecting DeepFakes is a constant cat-and-mouse game.<br>
-    That's why you need access to a good AI.<br>
-    With this extension you will automatically use the latest version of the AI.<br>
-    <br>
+    <article>
+    <h2>Why?</h2>
     <p>
-        The setup is done right away.<br>
+        Detecting DeepFakes is a constant cat-and-mouse game.<br>
+        That's why you need access to a good AI.<br>
+        With this extension you will automatically use the latest version of the AI from<br>
+        <img src="images/modzy-logo-light.svg"><br>
+        <a href="https://www.modzy.com/" target="_blank">Modzy</a>  is a leading ModelOps platform to integrate, monitor, and secure AI.
+    </p>
+    <br>
+    <h2>How to setup this extension?</h2>
+    <p>
+        First of all: it's fast and simple.<br>
         To get access to the AI model, you need a free Modzy account.<br>
+    </p>
         <a href="https://www.modzy.com/try-free/" target="_blank">Use this link to register.</a><br>
         <br>
+    <p>
         After Login to Modzy create a new project.<br>
+    </p>
         <img src="images/newProject.png"><br>
         <br>
+    <p>
         Then enter a project name and description.<br>
+    </p>
         <img src="images/projectDescription.png"><br>
         <br>
+    <p>
         Now select the project.<br>
+    </p>
         <img src="images/selectProject.png"><br>
         <br>
+    <p>
         After that you can download the key.<br>
+    </p>
         <img src="images/getKey.png"><br>
         <br>
-        Enter this key in the input field above and click 'Set ApiKey'.<br>
+    <p>
+        Enter this key in the input field above and click 'Set API key'.<br>
+    </p>
         <br><br>
+    <p>
             You're done.<br>
             <a href="https://www.youtube.com/" target="_blank">Visit YouTube</a> and review suspicious videos.<br>
             You have a new button in the player.<br>
-        <img src="images/newIcon.png">
     </p>
+        <img src="images/newIcon.png">
 
-
+    </article>
 
 </div>
 
