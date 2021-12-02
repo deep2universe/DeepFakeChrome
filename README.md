@@ -41,3 +41,8 @@ npm run build:parcel
 ```
 Then load the dist directory as an Chrome extension.
 
+
+## Code of conduct
+
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](https://github.com/deep2universe/DeepFakeChrome/blob/master/CODE_OF_CONDUCT.md)
+
