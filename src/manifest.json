@@ -1,6 +1,6 @@
 {
-  "name": "DeepFake check",
-  "description": "AI extension for YouTube deepfake checks",
+  "name": "Deepfake Detection",
+  "description": "AI extension for YouTube deepfake detection",
   "version": "1.0",
   "manifest_version": 3,
   "background": {

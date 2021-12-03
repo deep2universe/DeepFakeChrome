@@ -41,6 +41,11 @@ npm run build:parcel
 ```
 Then load the dist directory as an Chrome extension.
 
+## Used images
+Links to used images (CC) in this project:  
+![fake](src/images/fake.png) , ![check](src/images/check.png) from [Icons8](https://icons8.de)  
+![logo](src/images/logo48.png) from [Freepik](https://www.flaticon.com/free-icon/fake_2185544?term=fake&page=2&position=64&page=2&position=64&related_id=2185544&origin=search)
+
 
 ## Code of conduct
 

@@ -28,3 +28,16 @@ function isApiKeyValid(value){
     return regEx.test(value);
 }
 
+/**
+ * If ApiKey exists, display it
+ */
+function displayApiKey() {
+    chrome.storage.sync.get(['apiKey'], function (result) {
+        if (result.apiKey !== undefined) {
+            document.getElementById("apiKey").value=result.apiKey;
+        }
+
+    });
+}
+
+displayApiKey();
