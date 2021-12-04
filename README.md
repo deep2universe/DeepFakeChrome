@@ -1,6 +1,6 @@
 # AI DeepFake detection
 ![DeepFake Logo](src/images/logo128.png)  
-This is a browser extension to detect deep fakes.  
+This is a browser extension to detect deepfakes.  
 A new button is integrated in the YouTube player for this purpose.  
 
 
