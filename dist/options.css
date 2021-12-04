@@ -3,3 +3,9 @@
     display: none;
     font-size: medium;
 }
+
+.validMessage{
+    color: green;
+    display: none;
+    font-size: medium;
+}

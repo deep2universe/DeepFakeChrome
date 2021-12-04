@@ -4,11 +4,14 @@
 document.getElementById("submitApiKey").addEventListener("click", function (){
     let value = document.getElementById("apiKey").value;
     let errorMessage = document.getElementById('invalidKey');
+    let validMessage = document.getElementById('validKey');
     if(isApiKeyValid(value)){
         errorMessage.style.display='none';
+        validMessage.style.display='block';
         chrome.storage.sync.set({apiKey: value}, function() {
         });
     }else {
+        validMessage.style.display='none';
         errorMessage.style.display='block';
     }
 

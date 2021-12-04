@@ -51,3 +51,6 @@ Links to used images (CC) in this project:
 
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](https://github.com/deep2universe/DeepFakeChrome/blob/master/CODE_OF_CONDUCT.md)
 
+## License
+
+[Apache License 2.0](LICENSE)
