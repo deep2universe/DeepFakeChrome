@@ -24,6 +24,12 @@ The result of the AI analysis is displayed in this player.
 Example:  
 ![Obama](assets/Obama.png)  
 
+
+You can also ping the extension.    
+The popup window shows your analysis history.    
+![history](assets/history.png)  
+
+
 ## Development
 I use [PARCEL](https://parceljs.org/) as build tool and install it globally with
 ```shell
