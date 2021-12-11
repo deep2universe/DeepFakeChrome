@@ -1,4 +1,4 @@
-import * as deepfake from './deepfacke';
+import * as deepfake from './deepfake';
 
 let apiKey;
 

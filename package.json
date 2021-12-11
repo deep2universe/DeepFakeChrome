@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Detect DeepFake videos",
   "scripts": {
-    "copyJS": "cp src/popup.js dist/ && cp src/options.js dist/ && cp src/background.js dist/ && cp src/deepfacke.js dist/",
+    "copyJS": "cp src/popup.js dist/ && cp src/options.js dist/ && cp src/background.js dist/ && cp src/deepfake.js dist/",
     "copyHTML": "cp src/*.html dist/",
     "copyManifest": "cp src/manifest.json dist/",
     "copyImages": "cp -r src/images dist/",
