@@ -47,38 +47,52 @@ function initDeepFakeButtonInPlayer(){
     }, 100);
 }
 
+/**
+ * Show the recorded video always in a new review-div.
+ */
 function showVideoToCheck(){
-    if(document.getElementById("captureVideo") === null){
-        const div = document.createElement('div');
-        // div.style="position:absolute;top:100px"
-        div.id="recordingDiv"
-        div.innerHTML = `
-              <div id="recordingDivHeader">Click here to move</div>
-              <span style="text-align: left" onclick="document.getElementById('recordingDiv').style.display='none'"><u>[X]Close this window</u></span><br>
-              <video id="recording" width="260" height="220" controls></video>
-              <br>
-                <div id="preload-deepfake">  
-                <span style="font-size: medium">Processing...</span><br>                  
-                </div>
-              <br>
-              <div id="deep-check-results" style="display: none">
-                <h3>Result:</h3><br>
-                <span id="result-deepfake-message" style="font-size: large">       
-                </span>
-                
-              </div>
-              <br>
-              <a id="downloadButton" class="button">
-                Video download
-              </a>
-        `;
-        document.getElementById("content").append(div);
 
-        var image = document.createElement("img");
-        image.src = chrome.runtime.getURL("images/preloader.gif");
-        document.getElementById("preload-deepfake").appendChild(image);
+    removePreviewPlayerDiv(); // if we already showing a preview div, remote it
 
-        dragElement(div);
+    const div = document.createElement('div');
+    // div.style="position:absolute;top:100px"
+    div.id="recordingDiv"
+    div.innerHTML = `
+          <div id="recordingDivHeader">Click here to move</div>
+          <span style="text-align: left" onclick="document.getElementById('recordingDiv').style.display='none'"><u>[X]Close this window</u></span><br>
+          <video id="recording" width="260" height="220" controls></video>
+          <br>
+            <div id="preload-deepfake">  
+            <span style="font-size: medium">Processing...</span><br>                  
+            </div>
+          <br>
+          <div id="deep-check-results" style="display: none">
+            <h3>Result:</h3><br>
+            <span id="result-deepfake-message" style="font-size: large">       
+            </span>
+            
+          </div>
+          <br>
+          <a id="downloadButton" class="button">
+            Video download
+          </a>
+    `;
+    document.getElementById("content").append(div);
+
+    var image = document.createElement("img");
+    image.src = chrome.runtime.getURL("images/preloader.gif");
+    document.getElementById("preload-deepfake").appendChild(image);
+
+    dragElement(div);
+}
+
+/**
+ * Removes the preview player div if exists
+ */
+function removePreviewPlayerDiv(){
+    var previewPlayer = document.getElementById("recordingDiv");
+    if(previewPlayer !== null){
+        previewPlayer.parentNode.removeChild(previewPlayer);
     }
 }
 
