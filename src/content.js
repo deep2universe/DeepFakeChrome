@@ -2,6 +2,9 @@ import * as deepfake from './deepfake';
 
 let apiKey;
 
+/**
+ * Read the api key from storage. If it is not set, it will try to get it from the user.
+ */
 function readApiKey() {
     chrome.storage.sync.get(['apiKey'], function (result) {
         apiKey = result.apiKey;

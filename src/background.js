@@ -15,7 +15,8 @@ chrome.runtime.onInstalled.addListener(function() {
 chrome.webNavigation.onHistoryStateUpdated.addListener(function (details){
     if(details.url.includes("https://www.youtube.com/watch")){
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-            chrome.tabs.sendMessage(tabs[0].id, {message: "initRecordButton"});
+            chrome.tabs.sendMessage(tabs[0].id, {message: "initRecordButton"}, function(response) {
+            });
         });
     }
 });

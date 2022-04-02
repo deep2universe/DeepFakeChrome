@@ -2,7 +2,6 @@ import {dragElement} from './dragRecordingDiv';
 import {submitJob} from "./modzyDeepFakeModel";
 
 
-let isRecording=false;
 let mainVideo = document.getElementsByClassName("html5-main-video")[0];
 let recordingTimeMS = 5000;
 let apiKey;
@@ -33,7 +32,6 @@ function initDeepFakeButtonInPlayer(){
                 button.dataset.title = "Deepfake detection";
                 button.onclick = function(){startStopRecording();}
                 animControlsButton[0].insertBefore(button, animControlsButton[0].childNodes[0]);
-
                 let playerImage = new Image();
                 playerImage.src = chrome.runtime.getURL("/images/logo48.png");
                 playerImage.onload = () => {
@@ -153,10 +151,6 @@ async function startRecording(stream, lengthInMS) {
         recorded
     ])
         .then(() => data);
-}
-
-function stop(stream) {
-    stream.getTracks().forEach(track => track.stop());
 }
 
 

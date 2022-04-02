@@ -1,2 +1,0 @@
-function isApiKeyValid(e){return/[a-zA-Z0-9]{20}.[a-zA-Z0-9]{20}/.test(e)}function displayApiKey(){chrome.storage.sync.get(["apiKey"],(function(e){void 0!==e.apiKey&&(document.getElementById("apiKey").value=e.apiKey)}))}document.getElementById("submitApiKey").addEventListener("click",(function(){let e=document.getElementById("apiKey").value,i=document.getElementById("invalidKey");isApiKeyValid(e)?(i.style.display="none",chrome.storage.sync.set({apiKey:e},(function(){}))):i.style.display="block"})),displayApiKey();
-//# sourceMappingURL=options.ffa2b41d.js.map

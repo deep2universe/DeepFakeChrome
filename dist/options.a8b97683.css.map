@@ -1,1 +1,0 @@
-{"mappings":"AAAA,EACA,aACA,CAEA,cACA,SAAA,CACA,YACA","sources":["src/options.css"],"sourcesContent":["p{\r\n    color: dodgerblue;\r\n}\r\n\r\n.errorMessage{\r\n    color: red;\r\n    display: none;\r\n}\r\n"],"names":[],"version":3,"file":"options.a8b97683.css.map"}

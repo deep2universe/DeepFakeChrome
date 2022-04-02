@@ -86,12 +86,17 @@ function pollStatus(jobIdentifier){
             .redirects(0)
             .end(function (err, res) {
                 if (err || !res.ok) {
+                    clearInterval(pollJobInterval);
+                    updateModelResult("COMPLETED_WITH_ERROR", error);
                     console.error("Oh no! error");
                 } else {
                     let jobStatus = res.body["status"]
                     if("COMPLETED" === jobStatus || "TIMEDOUT" === jobStatus || "CANCELED" === jobStatus || "ERROR" === jobStatus){
                         clearInterval(pollJobInterval);
                         getJobResult(jobIdentifier);
+                    }else if("COMPLETED_WITH_ERROR" === jobStatus){
+                        clearInterval(pollJobInterval);
+                        updateModelResult("COMPLETED_WITH_ERROR", error);
                     }
                 }
             });
@@ -111,6 +116,7 @@ function getJobResult(jobIdentifier){
         .redirects(0)
         .end(function (err, res) {
             if (err || !res.ok) {
+                updateModelResult("COMPLETED_WITH_ERROR", error);
                 console.error("Oh no! error");
             } else {
                 // check for general error response
@@ -143,17 +149,65 @@ function updateModelResult(status, result){
     let message = document.getElementById("result-deepfake-message");
     if("SUCCESSFUL" === status){
         if(result >= 0.5){
-            message.innerHTML = ":-(<br>This is a DeepFake video.<br>AI is <b>" + (result*100) +"%</b> sure.";
+            message.innerHTML = "❌ Fake<br>This is a DeepFake video.<br>AI is <b>" + Math.round((result*100)) +"%</b> sure.<br><br>Note: An AI can always be wrong.<br> Therefore, be skeptical.";
             resultDIV.style.color="red";
+            updateSearchResult(true,(result*100));
         }else{
-            message.innerHTML = "^_^<br>No DeepFake video.<br> AI is <b>" + (100-(result*100)) +"%</b> sure.";
+            message.innerHTML = "✅ Ok<br>No DeepFake video.<br> AI is <b>" + Math.round((100-(result*100))) +"%</b> sure.<br><br>Note: An AI can always be wrong.<br> Therefore, be skeptical.";
             resultDIV.style.color="green";
+            updateSearchResult(false,(100-(result*100)));
         }
     }else {
-        message.innerHTML = "Oops, sorry, this should not happen. <br>Try again later.<br><br>Is the face in the video easy to see and not too small?<br><br>Error: " + result;
+        message.innerHTML = "Oops, sorry, this should not happen.<br> The AI could not process the video.<br> <br>Try again later.<br><br>Is the face in the video easy to see and not too small?<br>";
     }
     document.getElementById("preload-deepfake").style.display="none";
     resultDIV.style.display="inline";
+}
+
+/**
+ * Update Chrome storage with new model result
+ */
+function updateSearchResult(isDeepFake, score){
+    // Get current Page URL
+    let url = window.location.href;
+    // Get current Page Title
+    let title = document.title;
+
+    // Save deepfakecheck result to chrome storage
+    saveDeepFakeCheck(title,url, isDeepFake, score);
+
+}
+
+
+/**
+ * Save value to crome storage
+ */
+function saveDeepFakeCheck(page_title, page_url, isFake, score) {
+
+    // get current time
+    let currentTime = new Date();
+    // format time to string
+    let timeCheck = currentTime.getFullYear() + "-" + (currentTime.getMonth()+1) + "-" + currentTime.getDate() + " " + currentTime.getHours() + ":" + currentTime.getMinutes() + ":" + currentTime.getSeconds();
+
+
+    // get deepfake checks
+    chrome.storage.sync.get(['deepfakeChecks'], function (result) {
+        let deepfakeChecks = result.deepfakeChecks;
+        if (deepfakeChecks === undefined) {
+            deepfakeChecks = [];
+        }
+        // add new deepfake check
+        deepfakeChecks.push({
+            page_title: page_title,
+            page_url: page_url,
+            score: score,
+            isFake: isFake,
+            timeChecked: timeCheck
+        });
+        // save deepfake checks
+        chrome.storage.sync.set({'deepfakeChecks': deepfakeChecks}, function () {
+        });
+    });
 }
 
 export {submitJob};
