@@ -15,9 +15,13 @@ Part of the solution is to critically question and check if what you see is plau
 
 
 ## Table of contents
+- [Installation](#installation)
 - [Use](#use)
 - [Development](#development)
 
+## Installation
+You can install the extension from the Chrome Web Store:  
+[Link to Deepfake Detection](https://chrome.google.com/webstore/detail/deepfake-detection/gbokgdgbgfcdlbnonmlajiapbcpkdgnk)  
 
 ## Use
 After installation, the options page will open automatically.  
